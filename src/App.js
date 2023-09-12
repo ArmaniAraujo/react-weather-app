@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { WeatherTile } from './WeatherTile';
 import axios from 'axios'
-import { WeatherTileRow } from './WeatherTileRow';
+import WeatherTileRow from './WeatherTileRow';
 // require('dotenv').config()
 
 /*
  * 
  * TODO: Make cityOptions use lat and long params from geolocator() method
  * TODO: If geolocation grabber does not work, add dropdown to get country name, then dropdown to get state/location
- * 
+ * TODO: Component output row of tiles
+ * TODO: Fix up fetch/promise/then
+ * TODO: Figure out where to use let/var/const
  * 
  */
 
@@ -27,6 +29,17 @@ function App() {
     //   appid: 'tempidk'
     // }
   }
+  
+  let fakeItems = [
+    {id:1, weekday: 'Tuesday', temp: 17, feels_like: 20},
+    {id:2, weekday: 'Wednesday', temp: 20, feels_like: 25},
+    {id:3, weekday: 'Thursday', temp: 23, feels_like: 15},
+    {id:4, weekday: 'Friday', temp: 3, feels_like: 10},
+    {id:5, weekday: 'Saturday', temp: 18, feels_like: 7},
+    {id:6, weekday: 'Sunday', temp: 25, feels_like: 20},
+    {id:7, weekday: 'Monday', temp: 25, feels_like: 22},
+
+  ]
 
   const[city, setCity] = useState(() => {
     axios(cityOptions)
@@ -100,7 +113,7 @@ function App() {
       <button></button>
       <div>
       
-        <WeatherTileRow />
+        <WeatherTileRow weather={fakeItems}/>
       </div>
     </div>
   );
