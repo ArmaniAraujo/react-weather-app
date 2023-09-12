@@ -1,0 +1,7 @@
+.weathertilerow { 
+    display: flex;
+  }
+  
+  .weathertilerow * {
+    margin-right: 2%
+  }
