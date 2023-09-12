@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
 import { WeatherTile } from './WeatherTile';
+import styles from './styles/styles.module.css'
 
-export class WeatherTileRow extends Component {
+// Either use WeatherTileRow(props)
+// let weather = props.weather
+// weather[0].weekday
+// Or use this
 
-  render() {
-    return(
-      <div><WeatherTile/><WeatherTile/><WeatherTile/><WeatherTile/></div>
+export default function WeatherTileRow({ weather }) {
+
+    let list = weather.map((day) => (
+        <WeatherTile day = { day } key={ day.id } />
+    ));    
+
+    return (
+        <div className={ styles.weathertilerow }>
+            {list}
+        </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     )
-  }
-
 }
