@@ -8,9 +8,9 @@ import styles from './styles/styles.module.css'
 // Or use this
 
 export default function WeatherTileRow({ weather }) {
-
+    console.log(weather)
     let list = weather.map((day) => (
-        <WeatherTile day = { day } key={ day.id } />
+        <WeatherTile day = { day } key={ day.dt } />
     ));    
 
     return (
