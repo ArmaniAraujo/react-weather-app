@@ -17,9 +17,38 @@ function App() {
 
     
     const[coords, setCoords] = useState(() =>{ geolocator() })
-    const[city, setCity] = useState(() => { getCity() })
+    const[city, setCity] = useState([])
     const[weather, setWeather] = useState([])
     
+    // Gets city from server based on user coordinates
+    useEffect(() => {
+        if (coords !== null && coords !== undefined) {
+          // Your code here that depends on coords
+          console.log('Coords are available:', coords);
+      
+          // Additional code to fetch city based on coords
+          const params = {
+            lat: coords[0],
+            lon: coords[1],
+            limit: 1,
+          };
+      
+          const options = {
+            method: 'GET',
+            url: 'http://localhost:8000/getcity',
+            params: params,
+          };
+      
+          console.log('Coordinates are: ' + coords)
+          axios.request(options).then((response) => {
+              if (response.status === 200) {
+                setCity('poo');
+              } else {
+                alert('Error getting city. Please try again later');
+              }
+            });
+        }
+      }, [coords]);
   
   
   // let fakeItems = [
@@ -244,23 +273,12 @@ function App() {
     function locationSuccess(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        setCoords(latitude, longitude)
+        setCoords([latitude, longitude])
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
     }
     
     function locationError() {
         console.log('Error: Please enable location permissions to access weather')
-    }
-
-    function getCity() {
-        const options = {
-            method: 'GET',
-            url: 'http://localhost:8000/getcity'
-        }
-
-        axios.request(options).then((response) => {
-            console.log(response.data)
-        })
     }
 
     // ------------------------------ Driver Code ------------------------------
@@ -273,7 +291,7 @@ function App() {
     <div className="App">
       <h1>Hello, World!</h1>
 
-      <h1>You exist in: { coords }</h1>
+      <h1>You exist in: { city }</h1>
 
 
       <button></button>
