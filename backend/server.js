@@ -21,21 +21,24 @@ app.listen(PORT, () => {
 
 
 app.get('/getcity', (req, res) => {
-    console.log('getcity says hi!')
-})
-//     console.log('getting city...')
-//     const latitude = 43.595310   
-//     const longitude = -79.640579
-//     const appid = 'c9fb87ec5bad0d4dd7570738d7461030'
+    console.log('getting city...')
+    console.log(req.query.lon, req.query.lat, req.query.limit)
+    const latitude = 43.595310
+    const longitude = -79.640579
+    const appid = 'c9fb87ec5bad0d4dd7570738d7461030'
     
-//     const options = {
-//         method: 'GET',
-//         // url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${appid}`,
-//         url: `http://google.ca`
-//     }
-    
-//     console.log('code is...' + process.env.API)
-//     // const params = new URLSearchParams([['lat', latitude], ['lon', longitude], ['appid', process.env.API], ['limit', 1]])
-//     //const resp = axios.get(options)
+    const options = {
+        method: 'GET',
+        // url: `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&appid=${appid}`,
+        url: 'https://jsonplaceholder.typicode.com/todos/1'
+    }
+    axios.request(options).then((response) => {
+        if (response.status == 200)
+            res.json(response.data)
 
-// })
+    })
+    // const params = new URLSearchParams([['lat', latitude], ['lon', longitude], ['appid', process.env.API], ['limit', 1]])
+    // const resp = axios.get(options)
+    
+
+})
